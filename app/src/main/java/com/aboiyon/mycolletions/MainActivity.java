@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String books = mBooksEditText.getText().toString();
-                Log.d(TAG, books);
+//                Log.d(TAG, books);
                 Intent intent = new Intent(MainActivity.this, BooksActivity.class);
+                intent.putExtra("books", books);
                 startActivity(intent);
             }
         });
