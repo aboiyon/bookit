@@ -23,6 +23,19 @@
         android:textStyle="bold"
         android:text="MyCollections" />
 
+    <EditText
+        android:id="@+id/booksEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Enter_book(s)_name"
+        android:background="@color/colorTextIcons"
+        android:layout_above="@+id/findBooksButton"
+        android:padding="5dp"
+        android:layout_marginBottom="-550dp"
+        android:layout_centerHorizontal="true"/>
+
     <Button
         android:id="@+id/findBooksButton"
         android:layout_width="match_parent"
@@ -36,6 +49,6 @@
         android:layout_marginEnd="144dp"
         android:layout_marginBottom="35dp"
         android:text="Find Books"
-        android:textColor="@color/colorTextIcons"
-        android:background="@color/white"/>
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorTextIcons"/>
 </RelativeLayout>
