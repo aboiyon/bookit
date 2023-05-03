@@ -7,6 +7,9 @@ android {
         unitTests {
             includeAndroidResources = true
         }
+        buildFeatures {
+            dataBinding true
+        }
     }
     namespace 'com.aboiyon.mycolletions'
     compileSdk 33

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
     private Button mFindBooksButton;
     public static final String TAG = MainActivity.class.getSimpleName();
     private EditText mBooksEditText;
