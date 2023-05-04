@@ -16,7 +16,7 @@ import com.aboiyon.mycolletions.databinding.ActivityBooksBinding;
 
 public class BooksActivity extends AppCompatActivity {
     private ActivityBooksBinding binding;
-    private String[] books = new String[] {"Java", "Kotlin", "JavaScript", "TypeScript", "Python", "Ruby", "C++", "C#", "c", "Go"};
+    private String[] books = new String[] {"Java", "Kotlin", "JavaScript", "TypeScript", "Python", "Ruby", "C++", "C#", "c", "Go", "Android", "Angular","React","Spring Boot", "Django", "Flask", "Spark", "PySpark"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
