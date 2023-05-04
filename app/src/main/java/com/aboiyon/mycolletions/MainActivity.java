@@ -8,20 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private ActivityMainBinding binding;
-    private Button mFindBooksButton;
-    public static final String TAG = MainActivity.class.getSimpleName();
-    private EditText mBooksEditText;
+    @BindView(R.id.findBooksButton) Button mFindBooksButton;
+    @BindView(R.id.booksEditText) EditText mBooksEditText;
+    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mBooksEditText = (EditText) findViewById(R.id.booksEditText);
-        mFindBooksButton = findViewById(R.id.findBooksButton);
+        ButterKnife.bind(this);
         mFindBooksButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
