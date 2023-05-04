@@ -1,33 +1,33 @@
 package com.aboiyon.mycolletions;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+
+import com.aboiyon.mycolletions.databinding.ActivityBooksBinding;
+
 public class BooksActivity extends AppCompatActivity {
-    private TextView mBooksTextView;
-    private ListView mListView;
+    private ActivityBooksBinding binding;
     private String[] books = new String[] {"Java", "Kotlin", "JavaScript", "TypeScript", "Python", "Ruby", "C++", "C#", "c", "Go"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_books);
-        mBooksTextView = (TextView) findViewById(R.id.booksTextView);
-
-        mListView = (ListView) findViewById(R.id.ListView);
-        mBooksTextView = (TextView) findViewById(R.id.booksTextView);
+        binding = ActivityBooksBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, books);
-        mListView.setAdapter(adapter);
+        binding.listView.setAdapter(adapter);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 String book = ((TextView)view).getText().toString();
@@ -36,6 +36,6 @@ public class BooksActivity extends AppCompatActivity {
         });
         Intent intent = getIntent();
         String books = intent.getStringExtra("books");
-        mBooksTextView.setText("Here are some common books: " + books);
+        binding.booksTextView.setText("Here are some common books: " + books);
     }
 }
