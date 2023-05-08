@@ -11,9 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyColletions"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".BooksActivity"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".BooksActivity"
-            android:exported="false" />
+            android:name=".BooksActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aboiyon.mycolletions.MainActivity">
+            </meta-data>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
