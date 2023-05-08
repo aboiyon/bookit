@@ -13,26 +13,24 @@ import android.widget.Toast;
 
 import com.aboiyon.mycolletions.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityMainBinding binding;
-//    @BindView(R.id.findBooksButton) Button mFindBooksButton;
-//    @BindView(R.id.booksEditText) EditText mBooksEditText;
-//    @BindView(R.id.appNameTextView) TextView mAppNameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.findBooksButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String books = binding.booksEditText.getText().toString();
-                Intent intent = new Intent(MainActivity.this, BooksActivity.class);
-                intent.putExtra("books", books);
-                startActivity(intent);
-            }
-        });
+        binding.findBooksButton.setOnClickListener(this);
+    }
+    @Override
+        public void onClick(View view) {
+        if (view == binding.findBooksButton) {
+            String books = binding.booksEditText.getText().toString();
+            Intent intent = new Intent(MainActivity.this, BooksActivity.class);
+            intent.putExtra("books", books);
+            startActivity(intent);
+        }
     }
 }
 
