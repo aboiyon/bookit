@@ -1,7 +1,9 @@
 package com.aboiyon.mycolletions;
 
 import android.content.Intent;
+import android.icu.util.ULocale;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,10 +16,18 @@ import androidx.databinding.ViewDataBinding;
 
 import com.aboiyon.mycolletions.databinding.ActivityBooksBinding;
 
+import java.util.List;
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class BooksActivity extends AppCompatActivity {
+    private static final String TAG = BooksActivity.class.getSimpleName();
     private ActivityBooksBinding binding;
-    private String[] books = new String[] {"Java", "Kotlin", "JavaScript", "TypeScript", "Python", "Ruby", "C++", "C#", "c", "Go", "Android", "Angular","React","Spring Boot", "Django", "Flask", "Spark", "PySpark"};
-    private String[] uses = new String[] {"Microservices", "Android Apps", "Static web apps", "Dynamic web apps", "A.I", "Android Platform", "Mobile Apps", "Embedded systems", "M.L", "Mobile", "Websites", "Web Apps", "MicroServices", "Basic Apps", "Modern web", "API", "Frameworks"};
+//    private String[] books = new String[] {"Java", "Kotlin", "JavaScript", "TypeScript", "Python", "Ruby", "C++", "C#", "c", "Go", "Android", "Angular","React","Spring Boot", "Django", "Flask", "Spark", "PySpark"};
+//    private String[] uses = new String[] {"Microservices", "Android Apps", "Static web apps", "Dynamic web apps", "A.I", "Android Platform", "Mobile Apps", "Embedded systems", "M.L", "Mobile", "Websites", "Web Apps", "MicroServices", "Basic Apps", "Modern web", "API", "Frameworks"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +36,8 @@ public class BooksActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        MyBooksArrayAdapter adapter = new MyBooksArrayAdapter(this, android.R.layout.simple_list_item_1, books, uses); //arguments matching constructor's params
-        binding.listView.setAdapter(adapter);
+//        MyBooksArrayAdapter adapter = new MyBooksArrayAdapter(this, android.R.layout.simple_list_item_1, books, uses); //arguments matching constructor's params
+//        binding.listView.setAdapter(adapter);
 
         binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -39,5 +49,53 @@ public class BooksActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String books = intent.getStringExtra("books");
         binding.booksTextView.setText("Here are some common books: " + books);
+
+        BookStoreApi client = BookStoreClient.getClient();
+        Call<BookStoreSearchResponse> call = client.getBooks("books");
+
+        call.enqueue(new Callback<BookStoreSearchResponse>() {
+            @Override
+            public void onResponse(Call<BookStoreSearchResponse> call, Response<BookStoreSearchResponse> response) {
+                if (response.isSuccessful()){
+                    List<Book> bookList = response.body().getBooks();
+                    String[] books = new String[bookList.size()];
+                    String[] isbn = new String[bookList.size()];
+
+                    for (int i = 0; i< books.length; i++){
+                        books[i] = bookList.get(i).getTitle();
+                    }
+//                    for (int i = 0; i< isbn.length; i++){
+//                        Category category = bookList.get(i).getIsbn13().getBytes(0);
+//                        isbn[i] = category.get
+//                    }
+                    ArrayAdapter adapter = new MyBooksArrayAdapter(BooksActivity.this, android.R.layout.simple_list_item_1, books, isbn);
+                    binding.listView.setAdapter(adapter);
+                    showBooks();
+                } else {
+                    showUnsuccessfulMessage();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookStoreSearchResponse> call, Throwable t) {
+                Log.e("Error message", "onFailure: ", t);
+                hideProgressBar();
+                showFailureMessage();
+            }
+        });
+    }
+    private void showFailureMessage(){
+        binding.errorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
+        binding.errorTextView.setVisibility(View.VISIBLE);
+    }
+    private void showUnsuccessfulMessage(){
+        binding.errorTextView.setText("Something went wrong. Please try again later");
+        binding.errorTextView.setVisibility(View.VISIBLE);
+    }
+    private void showBooks(){
+        binding.listView.setVisibility(View.VISIBLE);
+    }
+    private void hideProgressBar(){
+        binding.progressBar.setVisibility(View.VISIBLE);
     }
 }
