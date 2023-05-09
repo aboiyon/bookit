@@ -26,8 +26,6 @@ import retrofit2.Response;
 public class BooksActivity extends AppCompatActivity {
     private static final String TAG = BooksActivity.class.getSimpleName();
     private ActivityBooksBinding binding;
-//    private String[] books = new String[] {"Java", "Kotlin", "JavaScript", "TypeScript", "Python", "Ruby", "C++", "C#", "c", "Go", "Android", "Angular","React","Spring Boot", "Django", "Flask", "Spark", "PySpark"};
-//    private String[] uses = new String[] {"Microservices", "Android Apps", "Static web apps", "Dynamic web apps", "A.I", "Android Platform", "Mobile Apps", "Embedded systems", "M.L", "Mobile", "Websites", "Web Apps", "MicroServices", "Basic Apps", "Modern web", "API", "Frameworks"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +33,6 @@ public class BooksActivity extends AppCompatActivity {
         binding = ActivityBooksBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
-//        MyBooksArrayAdapter adapter = new MyBooksArrayAdapter(this, android.R.layout.simple_list_item_1, books, uses); //arguments matching constructor's params
-//        binding.listView.setAdapter(adapter);
 
         binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
