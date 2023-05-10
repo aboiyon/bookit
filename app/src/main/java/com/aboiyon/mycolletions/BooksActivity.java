@@ -43,10 +43,21 @@ public class BooksActivity extends AppCompatActivity {
         });
         Intent intent = getIntent();
         String books = intent.getStringExtra("books");
-        binding.booksTextView.setText("Here are some common books: ");
+        binding.booksTextView.setText("Home: ");
 
+//        search books by keyword
+        String searchUrl = String.format(Constants.SEARCH_URL, "android");
+        Call<BookStoreSearchResponse> searchResponseCall = BookStoreClient.getClient().searchBooks(searchUrl);
+
+//        Get new books
+        Call<BookStoreSearchResponse> newBooksCall = BookStoreClient.getClient().getNewBooks();
+
+//        Get books in programming category, page 10
+        Call<BookStoreSearchResponse> booksByCategoryCall = BookStoreClient.getClient().getBooksByCategory("programming", 1);
+
+//        make the API calls
         BookStoreApi client = BookStoreClient.getClient();
-        Call<BookStoreSearchResponse> call = client.getBooks("books");
+        Call<BookStoreSearchResponse> call = client.searchBooks("books");
 
         call.enqueue(new Callback<BookStoreSearchResponse>() {
             @Override
