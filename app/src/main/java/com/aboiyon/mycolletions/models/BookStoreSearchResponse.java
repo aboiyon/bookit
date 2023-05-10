@@ -1,8 +1,9 @@
 
-package com.aboiyon.mycolletions;
+package com.aboiyon.mycolletions.models;
 
 import java.util.List;
 
+import com.aboiyon.mycolletions.models.Book;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

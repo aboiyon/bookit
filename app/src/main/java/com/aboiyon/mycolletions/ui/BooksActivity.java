@@ -1,7 +1,6 @@
-package com.aboiyon.mycolletions;
+package com.aboiyon.mycolletions.ui;
 
 import android.content.Intent;
-import android.icu.util.ULocale;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,13 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
-import com.aboiyon.mycolletions.databinding.ActivityBooksBinding;
+import com.aboiyon.mycolletions.models.Book;
+import com.aboiyon.mycolletions.models.BookStoreSearchResponse;
+import com.aboiyon.mycolletions.Constants;
+import com.aboiyon.mycolletions.MyBooksArrayAdapter;
+import com.aboiyon.mycolletions.network.BookStoreApi;
+import com.aboiyon.mycolletions.network.BookStoreClient;
 
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -102,6 +103,6 @@ public class BooksActivity extends AppCompatActivity {
         binding.listView.setVisibility(View.VISIBLE);
     }
     private void hideProgressBar(){
-        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.progressBar.setVisibility(View.GONE);
     }
 }

@@ -1,7 +1,9 @@
-package com.aboiyon.mycolletions;
+package com.aboiyon.mycolletions.network;
 
 import static com.aboiyon.mycolletions.Constants.BOOK_STORE_API_KEY;
 import static com.aboiyon.mycolletions.Constants.BOOK_STORE_URL;
+
+import com.aboiyon.mycolletions.network.BookStoreApi;
 
 import java.io.IOException;
 
@@ -14,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BookStoreClient {
     private static Retrofit retrofit = null;
-    static BookStoreApi getClient(){
+    public static BookStoreApi getClient(){
         if (retrofit == null){
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .addInterceptor(new Interceptor(){

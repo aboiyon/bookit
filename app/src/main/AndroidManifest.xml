@@ -14,14 +14,14 @@
         android:theme="@style/Theme.MyColletions"
         tools:targetApi="31">
         <activity
-            android:name=".BooksActivity">
+            android:name=".ui.BooksActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aboiyon.mycolletions.MainActivity">
+                android:value="com.aboiyon.mycolletions.ui.MainActivity">
             </meta-data>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/NoActionBarTheme"
             android:exported="true">
             <intent-filter>

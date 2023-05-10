@@ -16,6 +16,8 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.aboiyon.mycolletions.ui.BooksActivity;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

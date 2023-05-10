@@ -1,5 +1,5 @@
 
-package com.aboiyon.mycolletions;
+package com.aboiyon.mycolletions.models;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
