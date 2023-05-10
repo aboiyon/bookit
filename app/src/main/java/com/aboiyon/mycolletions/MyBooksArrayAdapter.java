@@ -8,18 +8,19 @@ public class MyBooksArrayAdapter extends ArrayAdapter {
     private String[] mBooks;
     private String[] mUses;
 
-    public  MyBooksArrayAdapter(Context mContext, int  resource, String[] mBooks, String[] mUses){
+    public  MyBooksArrayAdapter(Context mContext, int  resource, String[] mBooks){
         super(mContext, resource);
         this.mContext = mContext;
         this.mBooks = mBooks;
-        this.mUses = mUses;
+//        this.mUses = mUses;
     }
 
     @Override
     public Object getItem(int position){
         String book = mBooks[position];
-        String use = mUses[position];
-        return String.format("%s \nIs good for: %s", book, use);
+//        String use = mUses[position];
+//        return String.format("%s \nIs good for: %s", book);
+        return book;
     }
 
     @Override

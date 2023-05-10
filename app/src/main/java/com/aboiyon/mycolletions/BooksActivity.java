@@ -43,7 +43,7 @@ public class BooksActivity extends AppCompatActivity {
         });
         Intent intent = getIntent();
         String books = intent.getStringExtra("books");
-        binding.booksTextView.setText("Here are some common books: " + books);
+        binding.booksTextView.setText("Here are some common books: ");
 
         BookStoreApi client = BookStoreClient.getClient();
         Call<BookStoreSearchResponse> call = client.getBooks("books");
@@ -54,7 +54,7 @@ public class BooksActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     List<Book> bookList = response.body().getBooks();
                     String[] books = new String[bookList.size()];
-                    String[] isbn = new String[bookList.size()];
+//                    String[] isbn = new String[bookList.size()];
 
                     for (int i = 0; i< books.length; i++){
                         books[i] = bookList.get(i).getTitle();
@@ -63,7 +63,7 @@ public class BooksActivity extends AppCompatActivity {
 //                        Category category = bookList.get(i).getIsbn13().getBytes(0);
 //                        isbn[i] = category.get
 //                    }
-                    ArrayAdapter adapter = new MyBooksArrayAdapter(BooksActivity.this, android.R.layout.simple_list_item_1, books, isbn);
+                    ArrayAdapter adapter = new MyBooksArrayAdapter(BooksActivity.this, android.R.layout.simple_list_item_1, books);
                     binding.listView.setAdapter(adapter);
                     showBooks();
                 } else {
