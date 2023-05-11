@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aboiyon.mycolletions.databinding.ActivityBooksBinding;
 import com.aboiyon.mycolletions.models.Book;
 import com.aboiyon.mycolletions.models.BookStoreSearchResponse;
 import com.aboiyon.mycolletions.Constants;
