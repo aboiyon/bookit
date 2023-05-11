@@ -5,17 +5,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.aboiyon.mycolletions.Constants;
+import com.aboiyon.mycolletions.adapters.BookListAdapter;
 import com.aboiyon.mycolletions.databinding.ActivityBooksBinding;
 import com.aboiyon.mycolletions.models.Book;
 import com.aboiyon.mycolletions.models.BookStoreSearchResponse;
-import com.aboiyon.mycolletions.Constants;
-import com.aboiyon.mycolletions.MyBooksArrayAdapter;
 import com.aboiyon.mycolletions.network.BookStoreApi;
 import com.aboiyon.mycolletions.network.BookStoreClient;
 
@@ -25,9 +25,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+
 public class BooksActivity extends AppCompatActivity {
     private static final String TAG = BooksActivity.class.getSimpleName();
     private ActivityBooksBinding binding;
+    private BookListAdapter mAdapter;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,9 @@ public class BooksActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mRecyclerView = binding.recyclerView;
+
+        binding.recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 String book = ((TextView)view).getText().toString();
@@ -45,10 +52,10 @@ public class BooksActivity extends AppCompatActivity {
         });
         Intent intent = getIntent();
         String books = intent.getStringExtra("books");
-        binding.booksTextView.setText("Home: ");
+//        binding.booksTextView.setText("Home: ");
 
 //        search books by keyword
-        String searchUrl = String.format(Constants.SEARCH_URL, "android");
+        String searchUrl = String.format(Constants.SEARCH_URL, "android, machine learning, A.I");
         Call<BookStoreSearchResponse> searchResponseCall = BookStoreClient.getClient().searchBooks(searchUrl);
 
 //        Get new books
@@ -66,19 +73,22 @@ public class BooksActivity extends AppCompatActivity {
             public void onResponse(Call<BookStoreSearchResponse> call, Response<BookStoreSearchResponse> response) {
                 if (response.isSuccessful()){
                     List<Book> bookList = response.body().getBooks();
-                    String[] books = new String[bookList.size()];
+                    RecyclerView.Adapter adapter = new BookListAdapter(BooksActivity.this, bookList);
+                    binding.recyclerView.setAdapter(adapter);
+                    showBooks();
+//                    String[] books = new String[bookList.size()];
 //                    String[] isbn = new String[bookList.size()];
 
-                    for (int i = 0; i< books.length; i++){
-                        books[i] = bookList.get(i).getTitle();
-                    }
+//                    for (int i = 0; i< books.length; i++){
+//                        books[i] = bookList.get(i).getTitle();
+//                    }
 //                    for (int i = 0; i< isbn.length; i++){
 //                        Category category = bookList.get(i).getIsbn13().getBytes(0);
 //                        isbn[i] = category.get
 //                    }
-                    ArrayAdapter adapter = new MyBooksArrayAdapter(BooksActivity.this, android.R.layout.simple_list_item_1, books);
-                    binding.listView.setAdapter(adapter);
-                    showBooks();
+//                    ArrayAdapter adapter = new MyBooksArrayAdapter(BooksActivity.this, android.R.layout.simple_list_item_1, books);
+//                    binding.listView.setAdapter(adapter);
+//                    showBooks();
                 } else {
                     showUnsuccessfulMessage();
                 }
@@ -101,7 +111,7 @@ public class BooksActivity extends AppCompatActivity {
         binding.errorTextView.setVisibility(View.VISIBLE);
     }
     private void showBooks(){
-        binding.listView.setVisibility(View.VISIBLE);
+        binding.recyclerView.setVisibility(View.VISIBLE);
     }
     private void hideProgressBar(){
         binding.progressBar.setVisibility(View.GONE);
