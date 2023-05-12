@@ -16,7 +16,7 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.aboiyon.mycolletions.ui.BooksActivity;
+import com.aboiyon.mycolletions.ui.BooksListActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,14 +26,14 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class BooksActivityInstrumentationTest {
     @Rule
-    public ActivityScenarioRule<BooksActivity>activityTestRule = new ActivityScenarioRule<BooksActivity>(BooksActivity.class);
+    public ActivityScenarioRule<BooksListActivity>activityTestRule = new ActivityScenarioRule<BooksListActivity>(BooksListActivity.class);
     private View activityDecorView;
 
     @Before
     public void setUp(){
-        activityTestRule.getScenario().onActivity(new ActivityScenario.ActivityAction<BooksActivity>() {
+        activityTestRule.getScenario().onActivity(new ActivityScenario.ActivityAction<BooksListActivity>() {
             @Override
-            public void perform(BooksActivity activity) {
+            public void perform(BooksListActivity activity) {
                 activityDecorView = activity.getWindow().getDecorView();
             }
         });
@@ -43,7 +43,7 @@ public class BooksActivityInstrumentationTest {
     public void listItemClickDisplaysToastWithCorrectBook(){
         String bookName = "Java";
         onData(anything())
-                .inAdapterView(withId(R.id.ListView))
+                .inAdapterView(withId(R.id.recyclerView))
                 .atPosition(0)
                 .perform(click());
         onView(withText(bookName)).inRoot(withDecorView(not(activityDecorView)))

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View view) {
         if (view == binding.findBooksButton) {
             String books = binding.booksEditText.getText().toString();
-            Intent intent = new Intent(MainActivity.this, BooksActivity.class);
+            Intent intent = new Intent(MainActivity.this, BooksListActivity.class);
             intent.putExtra("books", books);
             startActivity(intent);
         }
