@@ -45,15 +45,6 @@ public class BooksActivity extends AppCompatActivity {
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-//        binding.recyclerView.OnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                String book = ((TextView)view).getText().toString();
-//                Toast.makeText(BooksActivity.this, book, Toast.LENGTH_LONG).show();
-//            }
-//        });
-
         binding.recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
@@ -104,19 +95,6 @@ public class BooksActivity extends AppCompatActivity {
                     RecyclerView.Adapter adapter = new BookListAdapter(BooksActivity.this, bookList);
                     binding.recyclerView.setAdapter(adapter);
                     showBooks();
-//                    String[] books = new String[bookList.size()];
-//                    String[] isbn = new String[bookList.size()];
-
-//                    for (int i = 0; i< books.length; i++){
-//                        books[i] = bookList.get(i).getTitle();
-//                    }
-//                    for (int i = 0; i< isbn.length; i++){
-//                        Category category = bookList.get(i).getIsbn13().getBytes(0);
-//                        isbn[i] = category.get
-//                    }
-//                    ArrayAdapter adapter = new MyBooksArrayAdapter(BooksActivity.this, android.R.layout.simple_list_item_1, books);
-//                    binding.listView.setAdapter(adapter);
-//                    showBooks();
                 } else {
                     showUnsuccessfulMessage();
                 }
