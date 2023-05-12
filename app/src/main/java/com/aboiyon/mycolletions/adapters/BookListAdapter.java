@@ -6,9 +6,9 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.aboiyon.mycolletions.databinding.ActivityBooksBinding;
 import com.aboiyon.mycolletions.databinding.BookListItemBinding;
 import com.aboiyon.mycolletions.models.Book;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookVi
             mBinding = binding;
         }
         public void bindBook(Book book){
-//            mBinding.bookImageView.setImageAlpha(book.getImage());
+            Picasso.get().load(book.getImage()).into(mBinding.bookImageView);
             mBinding.bookNameTextView.setText(book.getTitle());
             mBinding.categoryTextView.setText(book.getSubtitle());
             mBinding.isbnTextView.setText(book.getIsbn13());

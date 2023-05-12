@@ -2,13 +2,15 @@ package com.aboiyon.mycolletions.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aboiyon.mycolletions.Constants;
@@ -24,8 +26,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 
 public class BooksActivity extends AppCompatActivity {
@@ -43,13 +43,41 @@ public class BooksActivity extends AppCompatActivity {
 
         mRecyclerView = binding.recyclerView;
 
-        binding.recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+//        binding.recyclerView.OnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                String book = ((TextView)view).getText().toString();
+//                Toast.makeText(BooksActivity.this, book, Toast.LENGTH_LONG).show();
+//            }
+//        });
+
+        binding.recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String book = ((TextView)view).getText().toString();
-                Toast.makeText(BooksActivity.this, book, Toast.LENGTH_LONG).show();
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (child != null && motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    int position = recyclerView.getChildAdapterPosition(child);
+                    String book = ((TextView) child).getText().toString();
+                    Toast.makeText(BooksActivity.this, book, Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+                // Do nothing
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+                // Do nothing
             }
         });
+
         Intent intent = getIntent();
         String books = intent.getStringExtra("books");
 //        binding.booksTextView.setText("Home: ");
