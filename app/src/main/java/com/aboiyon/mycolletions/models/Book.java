@@ -4,7 +4,8 @@ package com.aboiyon.mycolletions.models;
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+import org.parceler.Parcel;
+@Parcel
 @Generated("jsonschema2pojo")
 public class Book {
 
