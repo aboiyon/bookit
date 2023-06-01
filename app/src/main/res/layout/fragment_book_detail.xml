@@ -1,20 +1,3 @@
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    tools:context=".ui.BookDetailFragment">-->
-
-<!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:text="@string/hello_blank_fragment" />-->
-
-<!--</FrameLayout>-->
-
-
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
@@ -28,9 +11,9 @@ tools:context=".ui.BookDetailFragment">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="180dp"
-    android:id="@+id/restaurantImageView"
-    android:src="@drawable/mybook"
-    android:scaleType="centerCrop" />
+        android:id="@+id/bookImageView"
+        android:src="@drawable/mybook"
+        android:scaleType="centerCrop" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,8 +25,8 @@ tools:context=".ui.BookDetailFragment">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Restaurant Name"
-            android:id="@+id/restaurantNameTextView"
+            android:text="Book Title"
+            android:id="@+id/bookTitleTextView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textSize="20sp"
@@ -52,23 +35,23 @@ tools:context=".ui.BookDetailFragment">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4.5/5"
-            android:id="@+id/ratingTextView"
-            android:layout_alignTop="@+id/restaurantNameTextView"
+            android:text="A.I, Python"
+            android:id="@+id/subtitleTextView"
+            android:layout_below="@+id/bookTitleTextView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/colorSecondaryText"
+            android:textStyle="italic"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$ 30"
+            android:id="@+id/priceTextView"
+            android:layout_alignTop="@+id/bookTitleTextView"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textColor="@color/colorAccent"
             android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Brunch, American"
-            android:id="@+id/cuisineTextView"
-            android:layout_below="@+id/restaurantNameTextView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textColor="@color/colorSecondaryText"
-            android:textStyle="italic" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -80,28 +63,16 @@ tools:context=".ui.BookDetailFragment">
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/saveRestaurantButton"
+            android:layout_above="@+id/saveBookButton"
             android:paddingLeft="30dp"
             android:paddingTop="20dp"
             android:paddingRight="30dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="View on Yelp"
-                android:id="@+id/websiteTextView"
-                android:drawableLeft="@drawable/ic_baseline_exit_to_app_white_18dp"
-                android:drawablePadding="4dp"
-                android:textColor="@color/colorTextIcons"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-               android:gravity="center" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="(503) 223-1282"
-                android:id="@+id/phoneTextView"
-                android:drawableLeft="@drawable/ic_baseline_call_white_18dp"
+                android:id="@+id/isbnTextView"
+
                 android:drawablePadding="4dp"
                 android:textColor="@color/colorTextIcons"
                 android:textSize="15sp"
@@ -111,21 +82,33 @@ tools:context=".ui.BookDetailFragment">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="123 SW Best Ever Ave. Portland, Oregon, 97222"
-                android:drawableLeft="@drawable/ic_baseline_map_white_18dp"
+                android:text="View on BookStore"
+                android:id="@+id/urlTextView"
+
                 android:drawablePadding="4dp"
-                android:id="@+id/addressTextView"
                 android:textColor="@color/colorTextIcons"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"/>
+               android:gravity="center" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="123 SW Best Ever Ave. Portland, Oregon, 97222"-->
+<!--                android:drawableLeft="@drawable/ic_baseline_map_white_18dp"-->
+<!--                android:drawablePadding="4dp"-->
+<!--                android:id="@+id/addressTextView"-->
+<!--                android:textColor="@color/colorTextIcons"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:gravity="center_vertical"/>-->
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save Restaurant"
-            android:id="@+id/saveRestaurantButton"
+            android:text="Save Book"
+            android:id="@+id/saveBookButton"
             android:layout_alignParentBottom="true"
             android:background="@color/colorAccent"
             android:textColor="@color/colorTextIcons"
