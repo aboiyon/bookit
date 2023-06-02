@@ -28,8 +28,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class BooksActivity extends AppCompatActivity {
-    private static final String TAG = BooksActivity.class.getSimpleName();
+public class BooksListActivity extends AppCompatActivity {
+    private static final String TAG = BooksListActivity.class.getSimpleName();
     private ActivityBooksBinding binding;
     private BookListAdapter mAdapter;
     private RecyclerView mRecyclerView;
@@ -52,7 +52,7 @@ public class BooksActivity extends AppCompatActivity {
                 if (child != null && motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     int position = recyclerView.getChildAdapterPosition(child);
                     String book = ((TextView) child).getText().toString();
-                    Toast.makeText(BooksActivity.this, book, Toast.LENGTH_LONG).show();
+                    Toast.makeText(BooksListActivity.this, book, Toast.LENGTH_LONG).show();
                     return true;
                 }
                 return false;
@@ -92,7 +92,7 @@ public class BooksActivity extends AppCompatActivity {
             public void onResponse(Call<BookStoreSearchResponse> call, Response<BookStoreSearchResponse> response) {
                 if (response.isSuccessful()){
                     List<Book> bookList = response.body().getBooks();
-                    RecyclerView.Adapter adapter = new BookListAdapter(BooksActivity.this, bookList);
+                    RecyclerView.Adapter adapter = new BookListAdapter(BooksListActivity.this, bookList);
                     binding.recyclerView.setAdapter(adapter);
                     showBooks();
                 } else {

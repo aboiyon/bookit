@@ -1,12 +1,17 @@
 
 package com.aboiyon.mycolletions.models;
 
-import javax.annotation.Generated;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import javax.annotation.Generated;
+
+
 @Generated("jsonschema2pojo")
-public class Book {
+public class Book implements Parcelable {
 
     @SerializedName("title")
     @Expose
@@ -51,6 +56,42 @@ public class Book {
         this.price = price;
         this.image = image;
         this.url = url;
+    }
+
+    protected Book(Parcel in) {
+        title = in.readString();
+        subtitle = in.readString();
+        isbn13 = in.readString();
+        price = in.readString();
+        image = in.readString();
+        url = in.readString();
+    }
+
+    public static final Parcelable.Creator<Book> CREATOR = new Parcelable.Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(subtitle);
+        dest.writeString(isbn13);
+        dest.writeString(price);
+        dest.writeString(image);
+        dest.writeString(url);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public String getTitle() {
