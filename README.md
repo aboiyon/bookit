@@ -66,7 +66,7 @@ Instrumentation Testing
 Give an example
 ```
 
-### And coding style tests
+### Coding style tests
 
 1. Android Lint: Android Lint is a built-in static code analysis tool in Android Studio. It analyzes your code for potential bugs, performance issues, and style violations. It includes various checks related to coding style, such as indentation, naming conventions, unused resources, and more. Android Lint can be run from the command line or integrated into your build process.
 2. Checkstyle: Checkstyle is a widely used tool for enforcing coding style guidelines in Java and Kotlin code. It provides a wide range of checks for naming conventions, indentation, whitespace, Javadoc comments etc. Checkstyle can be configured with a predefined set of rules or customized to match your specific coding style requirements.  
